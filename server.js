@@ -1,6 +1,8 @@
 import express from 'express'
 import { sequelize } from './db.js'
 import { QueryTypes, Sequelize } from 'sequelize'
+import Endereco from './models/endereco.model.js'
+import { enderecoController } from './controllers/endereco.controller.js'
 const app = express()
 app.use(express.json())
 
@@ -19,6 +21,8 @@ app.get('/produtos', async(req, res) => {
         res.status(500).json({ error: 'Erro ao buscar produtos' });
     }
 })
+
+enderecoController(app)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
