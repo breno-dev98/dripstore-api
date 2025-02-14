@@ -10,9 +10,9 @@ export const sequelize = new Sequelize(process.env.DB_POSTGRES);
 
 try {
   await sequelize.authenticate();
-  console.log('Connection has been established successfully.');
+  console.log('Conexão com o banco bem sucedida.');
 } catch (error) {
-  console.error('Unable to connect to the database:', error);
+  console.error('Não foi possível se contectar com o banco:', error);
 }
 
 export { Sequelize }

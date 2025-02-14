@@ -1,5 +1,5 @@
 import express from 'express'
-import Endereco from "../models/endereco.model";
+import Endereco from "../models/endereco.model.js";
 
 const router = express.Router()
 

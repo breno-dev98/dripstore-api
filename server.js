@@ -1,30 +1,18 @@
 import express from 'express'
-import { sequelize } from './db.js'
-import { QueryTypes, Sequelize } from 'sequelize'
-import Endereco from './models/endereco.model.js'
-import { enderecoController } from './controllers/endereco.controller.js'
+import { enderecoController } from './src/controllers/endereco.controller.js'
+import produtoRoutes from './src/routes/produtoRoutes.js'
+import { syncModels } from './src/models/index.js'
 const app = express()
+const PORT = process.env.PORT || 3000
 app.use(express.json())
+app.use("", produtoRoutes)
 
 app.get('/', (req, res) => {
     res.send('Servidor funcionando!')
 })
 
-app.get('/produtos', async(req, res) => {
-    try {
-        const result = await sequelize.query("SELECT * FROM produto", {
-            type: QueryTypes.SELECT
-        });
-        res.json(result)
-    } catch (error) {
-        console.error('Erro ao buscar produto', error);
-        res.status(500).json({ error: 'Erro ao buscar produtos' });
-    }
-})
-
 enderecoController(app)
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-})
+syncModels().then(() => {
+    app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+}).catch(err => console.error("Erro ao iniciar o servidor:", err));

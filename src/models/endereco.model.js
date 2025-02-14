@@ -1,5 +1,5 @@
-import { Sequelize, DataTypes, Model } from 'sequelize'
-const sequelize = new Sequelize('sqlite::memory');
+import { DataTypes } from 'sequelize'
+import { sequelize } from '../config/db.js';
 
 const Endereco = sequelize.define('Endereco', {
     cep: {
@@ -23,10 +23,6 @@ const Endereco = sequelize.define('Endereco', {
 
 },{
     tableName: 'endereco'
-});
-
-sequelize.sync().then(() => {
-    console.log("Modelo Endereco sincronizado com a tabela existente!");
 });
 
 export default Endereco;
