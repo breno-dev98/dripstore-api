@@ -22,7 +22,8 @@ const Endereco = sequelize.define('Endereco', {
     }
 
 },{
-    tableName: 'endereco'
+    tableName: 'endereco',
+    timestamps: false
 });
 
 export default Endereco;

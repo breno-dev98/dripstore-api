@@ -4,6 +4,12 @@ import { Sequelize } from "sequelize";
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+// Verificar se a variável DB_POSTGRES está definida
+if (!process.env.DB_POSTGRES) {
+  console.error('A variável de ambiente DB_POSTGRES não foi encontrada.');
+  process.exit(1);  // Encerra a aplicação com erro
+}
+
 // Criar a conexão com o banco de dados utilizando a string de conexão armazenada em DB_POSTGRES
 export const sequelize = new Sequelize(process.env.DB_POSTGRES);
 
