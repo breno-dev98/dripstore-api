@@ -1,14 +1,11 @@
 import express from 'express'
-import produtoRoutes from './src/routes/produtoRoutes.js'
-import enderecoRoutes from './src/routes/enderecoRoutes.js'
-import marcaRoutes from './src/routes/marcaRoutes.js'
+import routes from './src/routes/routes.js'
 import { syncModels } from './src/models/index.js'
 const app = express()
 const PORT = process.env.PORT || 3000
 app.use(express.json())
-app.use("", produtoRoutes)
-app.use("", enderecoRoutes)
-app.use("", marcaRoutes)
+app.use("", routes)
+
 
 app.get('/', (req, res) => {
     res.send('Servidor funcionando!')
