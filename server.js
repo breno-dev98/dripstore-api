@@ -15,5 +15,5 @@ app.get('/', (req, res) => {
 
 
 syncModels().then(() => {
-    app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+    app.listen(PORT, '0.0.0.0', () => console.log(`Servidor rodando na porta ${PORT}`));
 }).catch(err => console.error("Erro ao iniciar o servidor:", err));
