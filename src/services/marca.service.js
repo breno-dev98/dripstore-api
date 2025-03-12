@@ -1,12 +1,6 @@
 import MarcasRepository from "../repositories/MarcasRepository.js";
-import ServiceError from "../utils/ServiceError.js"
 class MarcaService {
     static async criarMarca(data) {
-        const {nome} = data;
-        if (typeof nome !== 'string' || nome.trim() === '') {
-            throw new ServiceError('Nome é obrigatório e deve ser uma string')
-        }
-
         return await MarcasRepository.create(data);
     }
 

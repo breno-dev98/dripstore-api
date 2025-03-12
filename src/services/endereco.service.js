@@ -1,9 +1,7 @@
 import EnderecoRepository from "../repositories/EnderecoRepository.js";
-import { validarEndereco } from "../utils/validarEndereco.js";
 
 class EnderecoService {
     static async criarEndereco(data) {
-        validarEndereco(data)
         return await EnderecoRepository.create(data);
     }
 

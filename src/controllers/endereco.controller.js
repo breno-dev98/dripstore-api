@@ -1,6 +1,5 @@
 // controllers/EnderecoController.js
 import EnderecoService from "../services/endereco.service.js";
-import ServiceError from "../utils/ServiceError.js";
 
 class EnderecoController {
   // Criar um endereco
@@ -9,9 +8,6 @@ class EnderecoController {
       const endereco = await EnderecoService.criarEndereco(req.body);
       return res.status(201).json(endereco);
     } catch (error) {
-      if (error instanceof ServiceError) {
-        return res.status(error.statusCode).json({ error: error.message });
-      }
 
       return res.status(500).json({error: "Erro interno do servidor."})
     }
