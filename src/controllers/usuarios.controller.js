@@ -1,11 +1,20 @@
 
 import UsuariosService from "../services/usuarios.service.js";
+import { hashSenha } from "../services/usuarios.service.js";
 
 class UsuariosController {
     // Criar uma usuario
     static async criar(req, res) {
         try {
-            const usuario = await UsuariosService.criarUsuarios(req.body);
+            const senhaCriptografada = await hashSenha(req.body.senha);
+
+            const novoUsuario = {
+                ...req.body,
+                senha: senhaCriptografada,
+            };
+
+            const usuario = await UsuariosService.criarUsuarios(novoUsuario);
+
             return res.status(201).json(usuario);
         } catch (error) {
             return res.status(500).json({ error: "Erro ao criar usuario" });
