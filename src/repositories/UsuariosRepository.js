@@ -1,6 +1,12 @@
 import Usuarios from "../models/usuarios.models.js";
 
 class UsuarioRepository {
+
+    //Buscar por email
+    static async findByEmail(email) {
+        return await Usuarios.findOne({where: {email}})
+    }
+
     //Criar um novo usuario
     static async create(data) {
         return await Usuarios.create(data);

@@ -13,6 +13,11 @@ const compararSenha = async (senhaDigitada, senhaHash) => {
 export { hashSenha, compararSenha}
 
 class UsuariosService {
+
+    static async buscarPorEmail(email) {
+        return await UsuariosRepository.findByEmail(email)
+    }
+
     static async criarUsuarios(data) {
         return await UsuariosRepository.create(data);
     }
