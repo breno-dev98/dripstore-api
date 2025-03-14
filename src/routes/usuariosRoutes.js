@@ -12,6 +12,5 @@ router.get("/usuarios", UsuarioController.listar);
 router.get("/usuarios/:id", UsuarioController.buscarPorId);
 router.put("/usuarios/:id", UsuarioController.atualizar);
 router.delete("/usuarios/:id", UsuarioController.deletar);
-router.post("/login", UsuarioController.login)
 
 export default router;
