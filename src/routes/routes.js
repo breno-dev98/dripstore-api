@@ -4,7 +4,7 @@ import enderecoRoutes from './enderecoRoutes.js';
 import marcaRoutes from './marcaRoutes.js';
 import categoriaRoutes from './categoriaRoutes.js';
 import usuariosRoutes from './usuariosRoutes.js'
-import authRoutes from './authRoutes.js'
+import loginRoutes from './loginRoutes.js'
 
 const router = Router();
 
@@ -13,6 +13,6 @@ router.use(enderecoRoutes);
 router.use(marcaRoutes);
 router.use(categoriaRoutes);
 router.use(usuariosRoutes);
-router.use(authRoutes);
+router.use(loginRoutes);
 
 export default router;

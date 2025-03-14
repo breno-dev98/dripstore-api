@@ -1,6 +1,6 @@
 import UsuariosService from "../services/usuarios.service.js";
 import {  compararSenha } from "../utils/bcryptHelper.js";
-
+import jwt from "jsonwebtoken";
 class LoginController {
     static async login(req, res) {
         try {
@@ -16,7 +16,18 @@ class LoginController {
                 return res.status(401).json({ error: "Senha inválida" })
             }
 
-            return res.status(200).json({ message: "Login bem-sucedido" })
+            
+            const token = jwt.sign(
+                { id: usuario.id, email: usuario.email }, 
+                process.env.JWT_SECRET, 
+                { expiresIn: "1h" } 
+            );
+
+            return res.status(200).json({
+                message: "Login bem-sucedido",
+                token 
+            });
+
         } catch (error) {
             return res.status(500).json({ error: "Erro ao realizar login" })
         }
