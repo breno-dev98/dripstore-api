@@ -1,6 +1,8 @@
 
 import UsuariosService from "../services/usuarios.service.js";
 import { hashSenha } from "../utils/bcryptHelper.js";
+import { gerarToken } from "../utils/jwtHelper.js";
+
 
 class UsuariosController {
 
@@ -16,7 +18,14 @@ class UsuariosController {
 
             const usuario = await UsuariosService.criarUsuarios(novoUsuario);
 
-            return res.status(201).json(usuario);
+            if (!usuario) {
+                return res.status(400).json({ error: "Erro ao criar usuário" });
+            }
+
+            // Gera um token JWT para o usuário recém-cadastrado
+            const token = gerarToken({ id: usuario.id, email: usuario.email });
+
+            return res.status(201).json({ message: "Cadastro bem-sucedido", novoUsuario: novoUsuario, token: token });
         } catch (error) {
             return res.status(500).json({ error: "Erro ao criar usuario" });
         }
