@@ -33,6 +33,12 @@ class MarcasRepository {
         await marca.destroy()
         return true;
     }
+
+    //Buscar por nome
+    static async findOne(nome) {
+        const marca = await Marcas.findOne({ where: { nome } });
+        return marca !== null;
+    }
 }
 
 export default MarcasRepository

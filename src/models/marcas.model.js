@@ -10,7 +10,7 @@ const Marcas = sequelize.define("Marcas",{
 },
 {
     tableName: "marcas",
-    timestamps: false
+    timestamps: true
 })
 
 export default Marcas;
