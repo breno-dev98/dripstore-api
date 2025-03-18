@@ -23,7 +23,7 @@ class UsuariosController {
             }
 
             // Gera um token JWT para o usuário recém-cadastrado
-            const token = gerarToken({ id: usuario.id, email: usuario.email });
+            const token = gerarToken({ id: usuario.id, email: usuario.email, nome: usuario.nome });
 
             return res.status(201).json({ message: "Cadastro bem-sucedido", novoUsuario: novoUsuario, token: token });
         } catch (error) {
