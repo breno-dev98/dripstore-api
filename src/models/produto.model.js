@@ -1,11 +1,20 @@
 import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
 import Categoria from './categoria.model.js'
+import Usuarios from './usuarios.models.js'
 
 const Produto = sequelize.define("Produto",{
     nome: {
         type: DataTypes.STRING(255),
         allowNull: false
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Usuarios,
+            key: "id"
+        }
     },
     descricao: {
         type: DataTypes.STRING(255),
@@ -41,6 +50,9 @@ const Produto = sequelize.define("Produto",{
 })
 
 Produto.belongsTo(Categoria, {foreignKey: 'categoriaId'});
-Categoria.hasMany(Produto, {foreignKey: 'categoriaId'})
+Categoria.hasMany(Produto, { foreignKey: 'categoriaId' })
+
+Produto.belongsTo(Usuarios, { foreignKey: 'user_id' })
+Usuarios.hasMany(Produto, {foreignKey: "user_id"})
 
 export default Produto;
