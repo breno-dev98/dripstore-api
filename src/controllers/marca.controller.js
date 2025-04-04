@@ -5,26 +5,30 @@ class MarcaController {
   // Criar uma marca
   static async criar(req, res) {
     try {
-      const marca = await MarcaService.criarMarca(req.body);
+      const dados = {
+        ...req.body,
+        user_id: req.user.id // <-- Garantindo que a marca será salva pro usuário logado
+      };
+      const marca = await MarcaService.criarMarca(dados);
       return res.status(201).json(marca);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao criar marca" });
     }
   }
 
-  // Listar todas as marcas
-  static async listar(req, res) {
+
+
+  static async listarMarcasPorUsuario(req, res) {
     try {
-      const user_id = req.query
-      if (!user_id) {
-        return res.status(400).json({error: "user_id é obrigatório."})
-      }
-      const marcas = await MarcaService.listarMarcas(user_id);
+      const user_id = req.user.id;
+
+      const marcas = await MarcaService.getAllByUser(user_id);
       return res.status(200).json(marcas);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao listar marcas" });
     }
   }
+
 
   // Buscar marca por ID
   static async buscarPorId(req, res) {

@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Definir as rotas
 router.post("/marcas", validarRequisicao(marcaSchema), validarNomeMarca, MarcaController.criar);
-router.get("/marcas", authenticateToken, MarcaController.listar);
+router.get("/marcas", authenticateToken, MarcaController.listarMarcasPorUsuario);
 router.get("/marcas/:id", MarcaController.buscarPorId);
 router.put("/marcas/:id", validarRequisicao(marcaSchema), validarNomeMarca, MarcaController.atualizar);
 router.delete("/marcas/:id", MarcaController.deletar);

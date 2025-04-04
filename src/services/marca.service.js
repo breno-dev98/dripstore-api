@@ -5,13 +5,14 @@ class MarcaService {
         return await MarcasRepository.create(data);
     }
 
-    static async listarMarcas(user_id) {
-        return await MarcasRepository.findAll({
-            where: {
-                user_id
-            }
-        });
+    static async listarMarcas() {
+        return await MarcasRepository.findAll();
     }
+
+    static async getAllByUser(userId) {
+        return await MarcasRepository.findByUser(userId);
+    };
+
 
     static async buscarMarcaPorId(id) {
         return await MarcasRepository.findById(id);

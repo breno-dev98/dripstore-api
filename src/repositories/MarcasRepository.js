@@ -16,6 +16,13 @@ class MarcasRepository {
         return await Marcas.findByPk(id);
     }
 
+    static async findByUser (userId) {
+        return await Marcas.findAll({
+            where: { user_id: userId },
+        });
+    };
+
+
     //Atualizar marca
     static async update(id, data) {
         const marca = await Marcas.findByPk(id);
