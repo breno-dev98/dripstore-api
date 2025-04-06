@@ -5,7 +5,7 @@ class CategoriaController {
   // Criar uma categoria
   static async criar(req, res) {
     try {
-      const categoria = await CategoriaService.criarCategoria(req.body);
+      const categoria = await CategoriaService.criarCategoria(req.body, req.user.id);
       return res.status(201).json(categoria);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao criar categoria" });
@@ -16,6 +16,14 @@ class CategoriaController {
   static async listar(req, res) {
     try {
       const categorias = await CategoriaService.listarCategorias();
+      return res.status(200).json(categorias);
+    } catch (error) {
+      return res.status(500).json({ error: "Erro ao listar categorias" });
+    }
+  }
+  static async listarCategoriaPorUsuario(req, res) {
+    try {
+      const categorias = await CategoriaService.listarCategoriasPorUsuario(req);
       return res.status(200).json(categorias);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao listar categorias" });

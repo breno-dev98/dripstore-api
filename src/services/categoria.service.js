@@ -2,13 +2,20 @@ import CategoriaRepository from "../repositories/CategoriaRepository.js";
 
 
 class CategoriaService {
-    static async criarCategoria(data) {
-
-        return await CategoriaRepository.create(data);
+    static async criarCategoria(body, userId) {
+        const novaCategoria = {
+            ...body,
+            user_id: userId
+        }
+        return await CategoriaRepository.create(novaCategoria);
     }
 
     static async listarCategorias() {
         return await CategoriaRepository.findAll();
+    }
+    static async listarCategoriasPorUsuario(req) {
+        const userId = req.user.id
+        return await CategoriaRepository.findAll(userId);
     }
 
     static async buscarCategoriaPorId(id) {

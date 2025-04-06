@@ -3,12 +3,18 @@ import Categoria from "../models/categoria.model.js";
 class CategoriaRepository {
     //Criar um novo categoria
     static async create(data) {
+        
         return await Categoria.create(data);
     }
 
     //Buscar todos os categorias
     static async findAll() {
         return await Categoria.findAll();
+    }
+    static async findAll(userId) {
+        return await Categoria.findByUser({
+            where: {user_id: userId}
+        });
     }
 
     //Buscar categoria por id
