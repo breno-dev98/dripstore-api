@@ -5,7 +5,7 @@ class ProdutoController {
   // Criar um produto
   static async criar(req, res) {
     try {
-      const produto = await ProdutoService.criarProduto(req.body);
+      const produto = await ProdutoService.criarProduto(req.body, req.user.id);
       return res.status(201).json(produto);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao criar produto" });
@@ -16,6 +16,15 @@ class ProdutoController {
   static async listar(req, res) {
     try {
       const produtos = await ProdutoService.listarProdutos();
+      return res.status(200).json(produtos);
+    } catch (error) {
+      return res.status(500).json({ error: "Erro ao listar produtos" });
+    }
+  }
+  // Listar todos os produtos
+  static async listarPorUsuario(req, res) {
+    try {
+      const produtos = await ProdutoService.listarProdutosPorUsuario(req.user.id);
       return res.status(200).json(produtos);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao listar produtos" });

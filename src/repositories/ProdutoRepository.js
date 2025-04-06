@@ -10,6 +10,12 @@ class ProdutoRepository {
     static async findAll() {
         return await Produto.findAll();
     }
+    //Buscar todos os produtos do usuario
+    static async findAllByUser(userId) {
+        return await Produto.findAll({
+            where: {user_id: userId}
+        });
+    }
 
     //Buscar produto por id
     static async findById(id) {
