@@ -10,12 +10,8 @@ class CategoriaService {
         return await CategoriaRepository.create(novaCategoria);
     }
 
-    static async listarCategorias() {
-        return await CategoriaRepository.findAll();
-    }
-    static async listarCategoriasPorUsuario(req) {
-        const userId = req.user.id
-        return await CategoriaRepository.findAll(userId);
+    static async listarCategoriasPorUsuario(userId) {
+        return await CategoriaRepository.findAllByUser(userId);
     }
 
     static async buscarCategoriaPorId(id) {

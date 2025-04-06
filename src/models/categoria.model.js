@@ -7,7 +7,6 @@ const Categoria = sequelize.define('Categoria', {
     nome: {
         type: DataTypes.STRING(255),
         allowNull: false,
-        unique: true
     },
     user_id: {
         type: DataTypes.INTEGER,

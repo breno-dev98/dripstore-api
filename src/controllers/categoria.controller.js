@@ -23,7 +23,7 @@ class CategoriaController {
   }
   static async listarCategoriaPorUsuario(req, res) {
     try {
-      const categorias = await CategoriaService.listarCategoriasPorUsuario(req);
+      const categorias = await CategoriaService.listarCategoriasPorUsuario(req.user.id);
       return res.status(200).json(categorias);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao listar categorias" });

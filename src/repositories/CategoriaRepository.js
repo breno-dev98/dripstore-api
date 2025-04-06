@@ -7,12 +7,8 @@ class CategoriaRepository {
         return await Categoria.create(data);
     }
 
-    //Buscar todos os categorias
-    static async findAll() {
-        return await Categoria.findAll();
-    }
-    static async findAll(userId) {
-        return await Categoria.findByUser({
+    static async findAllByUser(userId) {
+        return await Categoria.findAll({
             where: {user_id: userId}
         });
     }
