@@ -2,8 +2,9 @@ import { sequelize } from "../config/db.js";
 import { DataTypes } from "sequelize";
 import Categoria from './categoria.model.js'
 import Usuarios from './usuarios.models.js'
+import Marcas from './marcas.model.js'
 
-const Produto = sequelize.define("Produto",{
+const Produto = sequelize.define("Produto", {
     nome: {
         type: DataTypes.STRING(255),
         allowNull: false
@@ -21,7 +22,7 @@ const Produto = sequelize.define("Produto",{
         allowNull: false
     },
     avaliacao: {
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     tamanho: {
@@ -33,7 +34,7 @@ const Produto = sequelize.define("Produto",{
         allowNull: false
     },
     preco: {
-        type: DataTypes.DECIMAL(10,2),
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     categoriaId: {
@@ -43,16 +44,27 @@ const Produto = sequelize.define("Produto",{
             model: Categoria,
             key: 'id'
         }
+    },
+    marcaId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: Marcas,
+            key: 'id'
+        }
     }
 },
-{
-    tableName: "produto"
-})
+    {
+        tableName: "produto"
+    })
 
-Produto.belongsTo(Categoria, {foreignKey: 'categoriaId'});
-Categoria.hasMany(Produto, { foreignKey: 'categoriaId' })
+Produto.belongsTo(Categoria, { foreignKey: 'categoriaId' });
+Categoria.hasMany(Produto, { foreignKey: 'categoriaId' });
 
-Produto.belongsTo(Usuarios, { foreignKey: 'user_id' })
-Usuarios.hasMany(Produto, {foreignKey: "user_id"})
+Produto.belongsTo(Marcas, { foreignKey: 'marcasId' });
+Marcas.hasMany(Produto, { foreignKey: 'marcasId' });
+
+Produto.belongsTo(Usuarios, { foreignKey: 'user_id' });
+Usuarios.hasMany(Produto, { foreignKey: "user_id" });
 
 export default Produto;
