@@ -4,12 +4,10 @@ import MarcaService from "../services/marca.service.js";
 class MarcaController {
   // Criar uma marca
   static async criar(req, res) {
+    console.log("User:", req.user);
+    
     try {
-      const dados = {
-        ...req.body,
-        user_id: req.user.id // <-- Garantindo que a marca será salva pro usuário logado
-      };
-      const marca = await MarcaService.criarMarca(dados);
+      const marca = await MarcaService.criarMarca(req.body, req.user.id);
       return res.status(201).json(marca);
     } catch (error) {
       return res.status(500).json({ error: "Erro ao criar marca" });

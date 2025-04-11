@@ -4,6 +4,7 @@ import CategoriaService from "../services/categoria.service.js";
 class CategoriaController {
   // Criar uma categoria
   static async criar(req, res) {
+    
     try {
       const categoria = await CategoriaService.criarCategoria(req.body, req.user.id);
       return res.status(201).json(categoria);

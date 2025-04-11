@@ -1,8 +1,12 @@
 
 import MarcasRepository from "../repositories/MarcasRepository.js";
 class MarcaService {
-    static async criarMarca(data) {
-        return await MarcasRepository.create(data);
+    static async criarMarca(body, userId) {
+        const novaMarca = {
+            ...body,
+            user_id: userId
+        }
+        return await MarcasRepository.create(novaMarca);
     }
 
     static async listarMarcas() {

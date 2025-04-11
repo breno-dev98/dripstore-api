@@ -7,7 +7,6 @@ const Marcas = sequelize.define("Marcas",{
     nome: {
         type: DataTypes.STRING(255),
         allowNull: false,
-        unique: true
     },
     user_id: {
         type: DataTypes.INTEGER,
